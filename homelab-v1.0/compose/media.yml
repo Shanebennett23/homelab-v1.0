@@ -1,0 +1,31 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    restart: unless-stopped
+    network_mode: host
+    devices: [/dev/dri:/dev/dri]
+    healthcheck: {test: ["CMD","bash","-c","echo ok"], interval: 30s}
+    labels: ["homelab.stack=media"]
+    volumes: ["./config/plex:/config","./media/movies:/movies","./media/tv:/tv"]
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    restart: unless-stopped
+    devices: [/dev/dri:/dev/dri]
+    ports: ["8096:8096"]
+    networks: [frontend]
+    volumes: ["./config/jellyfin:/config","./media:/media"]
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    ports:["9696:9696"]
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    depends_on: [prowlarr]
+    ports:["8989:8989"]
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    depends_on: [prowlarr]
+    ports:["7878:7878"]
+  overseerr:
+    image: sctx/overseerr:latest
+    depends_on: [radarr,sonarr]
+    ports:["5055:5055"]

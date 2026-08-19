@@ -1,0 +1,10 @@
+services:
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    ports:["8080:8080"]
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    ports:["9091:9091"]
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    ports:["8191:8191"]

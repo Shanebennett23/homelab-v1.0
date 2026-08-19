@@ -1,0 +1,11 @@
+include:
+  - compose/media.yml
+  - compose/downloads.yml
+  - compose/management.yml
+  - compose/monitoring.yml
+
+networks:
+  frontend:
+  backend:
+  downloads:
+  monitoring:
