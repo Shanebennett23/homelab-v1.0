@@ -1,7 +1,0 @@
-services:
-  homarr:
-    image: ghcr.io/homarr-labs/homarr:latest
-    ports:["7575:7575"]
-  portainer:
-    image: portainer/portainer-ce:latest
-    ports:["9000:9000"]
